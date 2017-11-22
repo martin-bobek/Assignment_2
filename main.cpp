@@ -2,11 +2,6 @@
 #include "adi_initialize.h"
 #include "Assignment_2.h"
 
-/** 
- * If you want to use command program arguments, then place them in the following string. 
- */
-char __argv_string[] = "";
-
 #define POT1_SIZE			538
 #define POT1_90_FULL		484
 #define POT2_SIZE			519
@@ -18,14 +13,14 @@ char __argv_string[] = "";
 
 int main(int argc, char *argv[])
 {
-	CoreTimer_EVT6_ASM();
-	Init_CoreTimer();
-
 	int numCoffeePots = 4;
 	WHICHDISPLAY whichDisplay = (WHICHDISPLAY)(USE_TEXT_GUI | USE_CCES_GUI);
 
 	printf("\nStarting coffee pot simulator.\n");
 	Init_CoffeePotSimulation(numCoffeePots, whichDisplay);
+
+	CoreTimer_EVT6_ASM();
+	Init_CoreTimer();
 
 	char coffeePot1_Name[] = "WDS";
 	char coffeePot2_Name[] = "Martin";
@@ -60,6 +55,6 @@ int main(int argc, char *argv[])
 		MyHeatControlCode_ASM(coffeePot3_BaseAddress, temperatureRequired3);
 		MyHeatControlCode_CPP(coffeePot4_BaseAddress, temperatureRequired4);
 
-		Assignment2_Update();
+		WaitForCoreTimer();
 	}
 }

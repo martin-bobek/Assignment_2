@@ -4,9 +4,11 @@
 #include <stdio.h>
 #include "CoffeePot_SimulatorFunctions.h"
 
+extern volatile bool synced;
+
 void Init_CoreTimer();
 extern "C" void CoreTimer_EVT6_ASM(void);
-void Assignment2_Update();
+void WaitForCoreTimer();
 
 void MyWaterControlCode_CPP(COFFEEPOT_DEVICE *coffeePot_BaseAddress, unsigned short int waterLevelRequired, COFFEEPOT_ID potID);
 void MyHeatControlCode_CPP(COFFEEPOT_DEVICE *coffeePot_BaseAddress, unsigned short int temperatureRequired);

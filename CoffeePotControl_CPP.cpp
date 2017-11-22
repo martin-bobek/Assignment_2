@@ -1,9 +1,9 @@
 #include "Assignment_2.h"
 
-void Assignment2_Update(){
-	asm("RAISE 6;");
+void WaitForCoreTimer(){
+	while(!synced);
+	synced = false;
 }
-
 
 COFFEEPOT_DEVICE *InitCoffeePot(COFFEEPOT_ID potID, char coffeePotName[]){
 	COFFEEPOT_DEVICE *coffeePot_BaseAddress = 0;
@@ -19,9 +19,8 @@ COFFEEPOT_DEVICE *InitCoffeePot(COFFEEPOT_ID potID, char coffeePotName[]){
 	coffeePot_BaseAddress->controlRegister |= INITandSTAYPOWEREDON_BIT;
 
 	// poll bit 4 until coffee pot finishes turning on.
-	while(!(coffeePot_BaseAddress->controlRegister & DEVICE_READY_BIT_RO)){
-		Assignment2_Update();
-	}
+	while(!(coffeePot_BaseAddress->controlRegister & DEVICE_READY_BIT_RO))
+		WaitForCoreTimer();
 
 	// enable led display, and turn on led1 to show coffee pot is finished turning on and led4 to show led display is enabled
 	coffeePot_BaseAddress->controlRegister |= (USE_LED1_TO_SHOW_SYSTEM_POWEREDUP |
