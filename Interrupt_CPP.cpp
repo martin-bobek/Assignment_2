@@ -1,7 +1,7 @@
 #include "Assignment_2.h"
 #include <blackfin.h>
 
-volatile bool synced = false;
+volatile unsigned char synced = false;
 
 void Init_CoreTimer(){
 	*pTSCALE = 0;					// decrements counter once every clock cycle

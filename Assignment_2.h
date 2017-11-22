@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "CoffeePot_SimulatorFunctions.h"
 
-extern volatile bool synced;
+extern volatile unsigned char synced;
 
 void Init_CoreTimer();
 extern "C" void CoreTimer_EVT6_ASM(void);

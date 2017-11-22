@@ -43,7 +43,6 @@ int main(int argc, char *argv[])
 	unsigned short int temperatureRequired3 = 98;
 	unsigned short int temperatureRequired4 = 100;
 
-
 	while(true){
 		MyWaterControlCode_CPP(coffeePot1_BaseAddress, waterLevelRequired1, COFFEEPOT1);
 		MyWaterControlCode_CPP(coffeePot2_BaseAddress, waterLevelRequired2, COFFEEPOT2);
