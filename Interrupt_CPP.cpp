@@ -17,7 +17,6 @@ extern "C" void CoreTimer_ISR_CPP(void){
 
 	if (counter == 0){
 		counter = 10;
-		printf("\n");
 		UpdateSimulationDisplay();
 	}
 	else {
