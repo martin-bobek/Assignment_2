@@ -19,6 +19,9 @@ int main(int argc, char *argv[])
 	printf("\nStarting coffee pot simulator.\n");
 	Init_CoffeePotSimulation(numCoffeePots, whichDisplay);
 
+	Init_LED_GPIOInterface();
+	Write_LED_GPIOInterface(0);
+	Init_Input_GPIOInterface();
 	CoreTimer_EVT6_ASM();
 	Init_CoreTimer();
 
@@ -33,6 +36,18 @@ int main(int argc, char *argv[])
 	COFFEEPOT_DEVICE *coffeePot3_BaseAddress = InitCoffeePot(COFFEEPOT3, coffeePot3_Name);
 	COFFEEPOT_DEVICE *coffeePot4_BaseAddress = InitCoffeePot(COFFEEPOT4, coffeePot4_Name);
 
+	// poll bit 4 until coffee pot finishes turning on.
+	while(!IsReady(coffeePot1_BaseAddress) || !IsReady(coffeePot2_BaseAddress) || !IsReady(coffeePot3_BaseAddress) || !IsReady(coffeePot4_BaseAddress)){
+		SwitchesIn(coffeePot4_BaseAddress);
+		LedOut(coffeePot4_BaseAddress);
+		WaitForCoreTimer();
+	}
+
+	ActivateCoffeePot(coffeePot1_BaseAddress);
+	ActivateCoffeePot(coffeePot2_BaseAddress);
+	ActivateCoffeePot(coffeePot3_BaseAddress);
+	ActivateCoffeePot(coffeePot4_BaseAddress);
+
 	printf("\nEntering coffee pot control loop.\n");
 	unsigned short int waterLevelRequired1 = POT1_90_FULL;
 	unsigned short int waterLevelRequired2 = POT2_90_FULL;
@@ -44,6 +59,9 @@ int main(int argc, char *argv[])
 	unsigned short int temperatureRequired4 = 100;
 
 	while(true){
+		SwitchesIn(coffeePot4_BaseAddress);
+		LedOut(coffeePot4_BaseAddress);
+
 		MyWaterControlCode_CPP(coffeePot1_BaseAddress, waterLevelRequired1, COFFEEPOT1);
 		MyWaterControlCode_CPP(coffeePot2_BaseAddress, waterLevelRequired2, COFFEEPOT2);
 		MyWaterControlCode_ASM(coffeePot3_BaseAddress, waterLevelRequired3, COFFEEPOT3);
