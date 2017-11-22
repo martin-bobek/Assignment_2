@@ -1,18 +1,7 @@
 #include "Assignment_2.h"
 
 void Assignment2_Update(){
-	static unsigned char counter = 0;
-
-	if (counter == 0){
-		counter = 10;
-		printf("\n");
-		UpdateSimulationDisplay();
-	}
-	else {
-		CoffeePot_Sync();
-	}
-
-	counter--;
+	asm("RAISE 6;");
 }
 
 

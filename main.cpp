@@ -18,6 +18,9 @@ char __argv_string[] = "";
 
 int main(int argc, char *argv[])
 {
+	CoreTimer_EVT6_ASM();
+	Init_CoreTimer();
+
 	int numCoffeePots = 4;
 	WHICHDISPLAY whichDisplay = (WHICHDISPLAY)(USE_TEXT_GUI | USE_CCES_GUI);
 
@@ -44,6 +47,7 @@ int main(int argc, char *argv[])
 	unsigned short int temperatureRequired2 = 92;
 	unsigned short int temperatureRequired3 = 98;
 	unsigned short int temperatureRequired4 = 100;
+
 
 	while(true){
 		MyWaterControlCode_CPP(coffeePot1_BaseAddress, waterLevelRequired1, COFFEEPOT1);
