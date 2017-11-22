@@ -1,19 +1,18 @@
 #include "Assignment_2.h"
 
-void My_SimulatedOneSecondPassing(bool showDetail){
-	static unsigned char counter = 5;
-	if (showDetail){
-		counter--;
-		if (counter == 0){
-			counter = 5;
-			printf("\n");
-			UpdateSimulationDisplay();
-		}
-		else
-			CoffeePot_Sync();
+void Assignment2_Update(){
+	static unsigned char counter = 0;
+
+	if (counter == 0){
+		counter = 10;
+		printf("\n");
+		UpdateSimulationDisplay();
 	}
-	else
+	else {
 		CoffeePot_Sync();
+	}
+
+	counter--;
 }
 
 
@@ -32,7 +31,7 @@ COFFEEPOT_DEVICE *InitCoffeePot(COFFEEPOT_ID potID, char coffeePotName[]){
 
 	// poll bit 4 until coffee pot finishes turning on.
 	while(!(coffeePot_BaseAddress->controlRegister & DEVICE_READY_BIT_RO)){
-		My_SimulatedOneSecondPassing(true);
+		Assignment2_Update();
 	}
 
 	// enable led display, and turn on led1 to show coffee pot is finished turning on and led4 to show led display is enabled

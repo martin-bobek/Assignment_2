@@ -56,6 +56,6 @@ int main(int argc, char *argv[])
 		MyHeatControlCode_ASM(coffeePot3_BaseAddress, temperatureRequired3);
 		MyHeatControlCode_CPP(coffeePot4_BaseAddress, temperatureRequired4);
 
-		My_SimulatedOneSecondPassing(true);
+		Assignment2_Update();
 	}
 }

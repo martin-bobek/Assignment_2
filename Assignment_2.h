@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "CoffeePot_SimulatorFunctions.h"
 
-void My_SimulatedOneSecondPassing(bool showDetail);
+void Assignment2_Update();
 
 void MyWaterControlCode_CPP(COFFEEPOT_DEVICE *coffeePot_BaseAddress, unsigned short int waterLevelRequired, COFFEEPOT_ID potID);
 void MyHeatControlCode_CPP(COFFEEPOT_DEVICE *coffeePot_BaseAddress, unsigned short int temperatureRequired);
