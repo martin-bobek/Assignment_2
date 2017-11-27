@@ -1,6 +1,5 @@
 #include <blackfin.h>
-
-#define ASM_INTERRUP	1
+#include "CompileFlags.h"
 
 	.extern _CoreTimer_ISR_CPP;
 
@@ -9,7 +8,7 @@
 _CoreTimer_EVT6_ASM:
 	p0.L = LO(EVT6);
 	p0.H = HI(EVT6);
-#if ASM_INTERRUP
+#if ASM_INTERRUPT
 	R0.L = LO(_CoreTimer_ISR_ASM);
 	R0.H = HI(_CoreTimer_ISR_ASM);
 #else

@@ -65,12 +65,23 @@ int main(int argc, char *argv[])
 		MyWaterControlCode_CPP(coffeePot1_BaseAddress, waterLevelRequired1, COFFEEPOT1);
 		MyWaterControlCode_CPP(coffeePot2_BaseAddress, waterLevelRequired2, COFFEEPOT2);
 		MyWaterControlCode_ASM(coffeePot3_BaseAddress, waterLevelRequired3, COFFEEPOT3);
+#if MANUAL_CONTROL
+		coffeePot4_BaseAddress->waterInFlowRegister = 100;
+#else
 		MyWaterControlCode_CPP(coffeePot4_BaseAddress, waterLevelRequired4, COFFEEPOT4);
+#endif
+
 
 		MyHeatControlCode_CPP(coffeePot1_BaseAddress, temperatureRequired1);
 		MyHeatControlCode_CPP(coffeePot2_BaseAddress, temperatureRequired2);
 		MyHeatControlCode_ASM(coffeePot3_BaseAddress, temperatureRequired3);
+#if MANUAL_CONTROL
+		coffeePot4_BaseAddress->heaterBoostRegister = 1;
+		coffeePot4_BaseAddress->heaterRegister = 255;
+#else
 		MyHeatControlCode_CPP(coffeePot4_BaseAddress, temperatureRequired4);
+#endif
+
 
 		WaitForCoreTimer();
 	}

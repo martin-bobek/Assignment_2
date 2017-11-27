@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <GPIO2017/ADSP_GPIO_Interface.h>
 #include "CoffeePot_SimulatorFunctions.h"
+#include "CompileFlags.h"
 
 extern volatile unsigned char synced;
 
