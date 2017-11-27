@@ -1,7 +1,8 @@
 #include "Assignment_2.h"
 
 void WaitForCoreTimer(){
-	while(!synced);
+	while(!synced)
+		idle();
 	synced = false;
 }
 
